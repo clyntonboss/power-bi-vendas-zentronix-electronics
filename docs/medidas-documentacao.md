@@ -1,178 +1,69 @@
 # Documentação das Medidas: Projeto Faturamento — Zentronix Electronics
 
-Este documento descreve as medidas criadas no modelo semântico do Power
-BI relacionadas à tabela **fPedidos**.
+Este documento lista todas as medidas criadas no modelo Power BI, suas regras de negócio, dependências e retornos esperados.
 
-Todas as medidas seguem o padrão de desenvolvimento adotado no projeto:
+---
 
--   Uso de `VAR` para armazenar resultados intermediários
--   Uso de `COALESCE()` para evitar retorno `BLANK()`
--   Uso de `DIVIDE()` para evitar erro de divisão por zero
--   Documentação clara da regra de negócio
--   Estrutura padronizada para facilitar manutenção e escalabilidade
+## Medidas de Faturamento
 
-------------------------------------------------------------------------
+### faturamento
 
-# Medidas da Fato Pedidos
+```DAX
+faturamento = 
 
-## faturamento
+-- Medida:
+--      faturamento
+--
+-- Descrição:
+--      Calcula o valor total de faturamento com base nas vendas registradas.
+--
+-- Tabela origem:
+--      fPedidos
+--
+-- Regra de negócio:
+--      Soma todos os valores da coluna valor_venda respeitando o contexto de filtros aplicado no relatório (datas, produtos, clientes etc.).
+--
+-- Dependência:
+--      Coluna fPedidos[valor_venda]
+--
+-- Retorno:
+--      Valor numérico representando o faturamento total no contexto filtrado.
 
-**Descrição**
-
-Faturamento total gerado pelos pedidos registrados no modelo.
-
-**Tabela origem**
-
-`fPedidos`
-
-**Regra de negócio**
-
-Soma os valores da coluna `valor_venda` da tabela `fPedidos`,
-representando a receita total das vendas.
-
-**Retorno**
-
-Valor numérico representando o faturamento total.
-
-``` dax
-faturamento =
-VAR Resultado =
+VAR _Resultado =
     SUM(
-        fPedidos[valor_venda]
-    )
-RETURN
-    COALESCE(Resultado, 0)
-```
-
-------------------------------------------------------------------------
-
-## quantidade_pedidos
-
-**Descrição**
-
-Quantidade total de pedidos registrados no modelo.
-
-**Tabela origem**
-
-`fPedidos`
-
-**Regra de negócio**
-
-Conta todas as linhas da tabela `fPedidos`, onde cada linha representa
-um pedido registrado no sistema.
-
-**Retorno**
-
-Número inteiro representando a quantidade total de pedidos.
-
-``` dax
-quantidade_pedidos =
-VAR Resultado =
-    COUNTROWS(
-        fPedidos
+        fVendas[faturamento]
     )
 
 RETURN
-    COALESCE(
-        Resultado,
-        0
-    )
+    _Resultado
 ```
 
-------------------------------------------------------------------------
+### maior_menor_faturamento
 
-## quantidade_produtos
+```DAX
+maior_menor_faturamento = 
 
-**Descrição**
+-- Medida:
+--      maior_menor_faturamento
+--
+-- Descrição:
+--      Retorna o valor de faturamento apenas para os meses com maior ou menor faturamento dentro do período selecionado.
+--
+-- Tabela de apoio:
+--      dCalendario
+--
+-- Regra de negócio:
+--      Identifica o maior e o menor faturamento considerando o contexto de seleção do relatório (ALLSELECTED).
+--      Caso o mês atual corresponda ao maior ou ao menor faturamento, o valor de faturamento é retornado.
+--      Caso contrário, retorna BLANK().
+--
+-- Dependência:
+--      [faturamento]
+--
+-- Uso típico:
+--      Destaque em gráficos de colunas ou linhas para evidenciar os meses de melhor e pior desempenho.
 
-Quantidade total de produtos vendidos.
-
-**Tabela origem**
-
-`fPedidos`
-
-**Regra de negócio**
-
-Soma os valores da coluna `quantidade_produto` da tabela `fPedidos`,
-representando o total de itens vendidos.
-
-**Retorno**
-
-Número inteiro representando a quantidade total de produtos vendidos.
-
-``` dax
-quantidade_produtos =
-VAR Resultado =
-    SUM(
-        fPedidos[quantidade_produto]
-    )
-
-RETURN
-    COALESCE(
-        Resultado,
-        0
-    )
-```
-
-------------------------------------------------------------------------
-
-## ticket_medio
-
-**Descrição**
-
-Valor médio gasto por pedido.
-
-**Regra de negócio**
-
-Divide o faturamento total pela quantidade total de pedidos,
-representando o valor médio de cada pedido.
-
-**Dependências**
-
--   `[faturamento]`
--   `[quantidade_pedidos]`
-
-**Retorno**
-
-Valor monetário representando o ticket médio.
-
-``` dax
-ticket_medio =
-VAR Resultado =
-    DIVIDE(
-        [faturamento],
-        [quantidade_pedidos]
-    )
-
-RETURN
-    COALESCE(
-        Resultado,
-        0
-    )
-```
-
-------------------------------------------------------------------------
-
-# Medidas de Destaque de Desempenho
-
-Estas medidas são utilizadas para **identificar extremos de desempenho
-(maior e menor valor)** dentro do período selecionado no relatório.
-
-Elas normalmente são utilizadas em **gráficos de linha ou coluna** para
-destacar visualmente os meses de melhor e pior resultado.
-
-A lógica considera sempre o contexto filtrado utilizando
-**`ALLSELECTED()`**, respeitando seleções feitas pelo usuário no
-relatório.
-
-------------------------------------------------------------------------
-
-## maior_menor_faturamento
-
-``` dax
-maior_menor_faturamento =
-
-VAR MenorFaturamento =
+VAR _MenorFaturamento =
     MINX(
         ALLSELECTED(
             dCalendario[mes_abreviado],
@@ -181,7 +72,7 @@ VAR MenorFaturamento =
         [faturamento]
     )
 
-VAR MaiorFaturamento =
+VAR _MaiorFaturamento =
     MAXX(
         ALLSELECTED(
             dCalendario[mes_abreviado],
@@ -190,134 +81,321 @@ VAR MaiorFaturamento =
         [faturamento]
     )
 
-VAR FaturamentoAtual =
+VAR _FaturamentoAtual =
     [faturamento]
 
 RETURN
     IF(
-        FaturamentoAtual = MaiorFaturamento ||
-        FaturamentoAtual = MenorFaturamento,
-        FaturamentoAtual
+        _FaturamentoAtual = _MaiorFaturamento ||
+        _FaturamentoAtual = _MenorFaturamento,
+        _FaturamentoAtual
     )
 ```
 
-------------------------------------------------------------------------
+## Medidas de Produtos Vendidos
 
-## maior_menor_vendas
+### produtos_vendidos
 
-``` dax
-maior_menor_vendas =
+```DAX
+produtos_vendidos = 
 
-VAR MenorVenda =
+-- Medida:
+--      produtos_vendidos
+--
+-- Descrição:
+--      Calcula a quantidade total de produtos vendidos considerando o contexto de filtros aplicado no relatório.
+--
+-- Tabela origem:
+--     fPedidos
+--
+-- Regra de negócio:
+--      Soma os valores da coluna quantidade da tabela de pedidos, representando o total de itens vendidos no contexto filtrado.
+--
+-- Dependência:
+--      fPedidos[quantidade]
+--
+-- Retorno:
+--      Número inteiro representando a quantidade total de produtos vendidos.
+--
+-- Observação:
+--      COALESCE é utilizado para evitar retorno BLANK().
+
+VAR _Resultado =
+    SUM(
+        fVendas[quantidade]
+    )
+
+RETURN
+    _Resultado
+```
+
+### maior_menor_produtos_vendidos
+
+```DAX
+maior_menor_produtos_vendidos = 
+
+-- Medida:
+--      maior_menor_produtos_vendidos
+--
+-- Descrição:
+--      Retorna a quantidade de produtos vendidos apenas para os meses com maior ou menor quantidade dentro do período selecionado.
+--
+-- Tabela de apoio:
+--      dCalendario
+--
+-- Regra de negócio:
+--      Identifica a maior e a menor quantidade de produtos vendidos considerando o contexto de seleção do relatório (ALLSELECTED).
+--      Caso o mês atual corresponda à maior ou à menor quantidade vendida, o valor da quantidade é retornado.
+--      Caso contrário, retorna BLANK().
+--
+-- Dependência:
+--      [produtos_vendidos]
+--
+-- Uso típico:
+--      Destaque em gráficos de colunas ou linhas para evidenciar os meses com maior e menor volume de produtos vendidos.
+
+VAR _MenorQuantidade =
     MINX(
         ALLSELECTED(
             dCalendario[mes_abreviado],
             dCalendario[mes_numero]
         ),
-        [quantidade_pedidos]
+        [produtos_vendidos]
     )
 
-VAR MaiorVenda =
+VAR _MaiorQuantidade =
     MAXX(
         ALLSELECTED(
             dCalendario[mes_abreviado],
             dCalendario[mes_numero]
         ),
-        [quantidade_pedidos]
+        [produtos_vendidos]
     )
 
-VAR VendaAtual =
-    [quantidade_pedidos]
+VAR _QuantidadeAtual =
+    [produtos_vendidos]
 
 RETURN
     IF(
-        VendaAtual = MaiorVenda ||
-        VendaAtual = MenorVenda,
-        VendaAtual
+        _QuantidadeAtual = _MaiorQuantidade ||
+        _QuantidadeAtual = _MenorQuantidade,
+        _QuantidadeAtual
     )
 ```
 
-------------------------------------------------------------------------
+### percentual_produtos_vendidos_loja
 
-## maior_menor_quantidade_produtos
+```DAX
+percentual_produtos_vendidos_loja = 
 
-``` dax
-maior_menor_quantidade_produtos =
+-- Medida:
+--      percentual_produtos_vendidos_loja
+--
+-- Descrição:
+--      Retorna o percentual de produtos vendidos por loja no período analisado.
+--
+-- Medida de apoio:
+--      quantidade_produtos
+--
+-- Regra de negócio:
+--      Divide a quantidade de produtos vendidos pela quantidade de produtos vendidos removendo filtros.
+--
+-- Dependência:
+--      [quantidade_pedidos]
+--
+-- Uso típico:
+--      Indica o percentual de produtos vendidos por loja.
 
-VAR MenorQuantidade =
+VAR _Resultado =
+    DIVIDE(
+        [produtos_vendidos],
+        CALCULATE(
+            [produtos_vendidos],
+            REMOVEFILTERS(
+                dLojas
+            )
+        )
+    )
+
+RETURN
+    _Resultado
+```
+
+## Medidas de Ticket Médio
+
+```DAX
+ticket_medio = 
+
+-- Medida:
+--      ticket_medio
+--
+-- Descrição:
+--      Calcula o valor médio por pedido (ticket médio).
+--
+-- Regra de negócio:
+--      Divide o faturamento total pela quantidade de pedidos considerando o contexto de filtros do relatório.
+--
+-- Dependências:
+--      [faturamento]
+--      [quantidade_pedidos]
+--
+-- Retorno:
+--      Valor monetário representando o ticket médio.
+--
+-- Observação:
+--      COALESCE é utilizado para evitar retorno BLANK().
+
+VAR Resultado =
+    DIVIDE(
+        [faturamento],
+        [transacoes]
+    )
+
+RETURN
+    COALESCE(
+        Resultado,
+        0
+    )
+```
+
+## Medidas de Transações
+
+```DAX
+transacoes = 
+
+-- Medida:
+--      transacoes
+--
+-- Descrição:
+--      Calcula a quantidade total de transações registradas considerando o contexto de filtros aplicado no relatório
+--
+-- Tabela origem:
+--      fPedidos
+--
+-- Regra de negócio:
+--      Conta o número de registros na tabela de pedidos.
+--      Cada linha representa uma transação.
+--
+-- Dependência:
+--      Tabela fPedidos
+--
+-- Retorno:
+--      Número inteiro representando a quantidade de transações no contexto filtrado.
+--
+-- Observação:
+--      COALESCE é utilizado para evitar retorno BLANK().
+
+VAR _Resultado =
+    COUNTROWS(
+        fVendas
+    )
+
+RETURN
+    COALESCE(
+        _Resultado,
+        0
+    )
+```
+
+```DAX
+maior_menor_transacao = 
+
+-- Medida:
+--      maior_menor_vendas
+--
+-- Descrição:
+--      Retorna a quantidade de transações apenas para os meses com maior ou menor volume dentro do período selecionado.
+--
+-- Tabela de apoio:
+--      dCalendario
+--
+-- Regra de negócio:
+--      Identifica a maior e a menor quantidade de transações considerando o contexto de seleção do relatório (ALLSELECTED).
+--      Caso o mês atual corresponda à maior ou à menor quantidade de pedidos, o valor é retornado.
+--      Caso contrário, retorna BLANK().
+--
+-- Dependência:
+--      [transacoes]
+--
+-- Uso típico:
+--      Destaque em gráficos de colunas ou linhas para evidenciar os meses com maior e menor volume de vendas.
+
+VAR _MenorTransacao =
     MINX(
         ALLSELECTED(
             dCalendario[mes_abreviado],
             dCalendario[mes_numero]
         ),
-        [quantidade_produtos]
+        [transacoes]
     )
 
-VAR MaiorQuantidade =
+VAR _MaiorTransacao =
     MAXX(
         ALLSELECTED(
             dCalendario[mes_abreviado],
             dCalendario[mes_numero]
         ),
-        [quantidade_produtos]
+        [transacoes]
     )
 
-VAR QuantidadeAtual =
-    [quantidade_produtos]
+VAR _TransacaoAtual =
+    [transacoes]
 
 RETURN
     IF(
-        QuantidadeAtual = MaiorQuantidade ||
-        QuantidadeAtual = MenorQuantidade,
-        QuantidadeAtual
+        _TransacaoAtual = _MaiorTransacao ||
+        _TransacaoAtual = _MenorTransacao,
+        _TransacaoAtual
     )
 ```
 
-------------------------------------------------------------------------
+```DAX
+cores_maior_menor_transacao = 
 
-## cores_maior_menor_vendas
+-- Medida:
+--      cores_maior_menor_transacao
+--
+-- Descrição:
+--      Define cores para destacar o maior e o menor volume de transações no período selecionado.
+--
+-- Tabela de apoio:
+--      dCalendario
+--
+-- Regra de negócio:
+--      Identifica, dentro do contexto filtrado (ALLSELECTED), o mês com maior e o mês com menor quantidade de transações.
+--      Maior valor → Verde escuro (#33CC33)
+--      Menor valor → Vermelho escuro (#FF0000)
+--      Demais valores → Cinza (#808080)
+--
+-- Dependência:
+--      [transacoes]
+--
+-- Uso:
+--      Aplicada em formatação condicional de gráficos ou tabelas no Power BI para destacar desempenho mensal.
 
-``` dax
-cores_maior_menor_vendas = 
-
-VAR MenorVenda =
+VAR _MenorTransacao =
     MINX(
         ALLSELECTED(
             dCalendario[mes_abreviado],
             dCalendario[mes_numero]
         ),
-        [quantidade_pedidos]
+        [transacoes]
     )
 
-VAR MaiorVenda =
+VAR _MaiorTransacao =
     MAXX(
         ALLSELECTED(
             dCalendario[mes_abreviado],
             dCalendario[mes_numero]
         ),
-        [quantidade_pedidos]
+        [transacoes]
     )
 
 RETURN
     SWITCH(
         TRUE(),
-        [quantidade_pedidos] = MaiorVenda, "#33CC33",
-        [quantidade_pedidos] = MenorVenda, "#FF0000",
+        [transacoes] = _MaiorTransacao, "#33CC33",
+        [transacoes] = _MenorTransacao, "#FF0000",
         "#808080"
     )
 ```
-
-------------------------------------------------------------------------
-
-# Padrão adotado no projeto
-
--   Clareza na regra de negócio
--   Padronização de código
--   Uso de variáveis (`VAR`) para melhorar legibilidade
--   Tratamento de valores nulos com `COALESCE`
--   Uso de funções seguras como `DIVIDE`
--   Facilidade de manutenção e evolução do modelo
-
-Esse padrão garante maior **qualidade técnica**, **legibilidade do
-modelo semântico** e **facilidade de colaboração em ambientes
-versionados**, como projetos mantidos no GitHub.
