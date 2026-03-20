@@ -348,10 +348,8 @@ RETURN
         _TransacaoAtual
     )
 ```
-<br>
-
 ***
-
+<br>
 ```DAX
 cores_maior_menor_transacao = 
 
