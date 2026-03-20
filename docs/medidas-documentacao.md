@@ -350,6 +350,8 @@ RETURN
 ```
 <br>
 
+<hr style="border: 1px solid #ccc;">
+
 ```DAX
 cores_maior_menor_transacao = 
 
