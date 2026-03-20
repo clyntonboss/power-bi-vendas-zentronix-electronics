@@ -5,8 +5,7 @@ Este documento lista todas as medidas criadas no modelo Power BI, suas regras de
 ---
 
 ## Medidas de Faturamento
-
-### faturamento
+<br>
 
 ```DAX
 faturamento = 
@@ -37,8 +36,7 @@ VAR _Resultado =
 RETURN
     _Resultado
 ```
-
-### maior_menor_faturamento
+<br>
 
 ```DAX
 maior_menor_faturamento = 
@@ -93,8 +91,7 @@ RETURN
 ```
 
 ## Medidas de Produtos Vendidos
-
-### produtos_vendidos
+<br>
 
 ```DAX
 produtos_vendidos = 
@@ -128,8 +125,7 @@ VAR _Resultado =
 RETURN
     _Resultado
 ```
-
-### maior_menor_produtos_vendidos
+<br>
 
 ```DAX
 maior_menor_produtos_vendidos = 
@@ -182,8 +178,7 @@ RETURN
         _QuantidadeAtual
     )
 ```
-
-### percentual_produtos_vendidos_loja
+<br>
 
 ```DAX
 percentual_produtos_vendidos_loja = 
@@ -222,6 +217,7 @@ RETURN
 ```
 
 ## Medidas de Ticket Médio
+<br>
 
 ```DAX
 ticket_medio = 
@@ -259,6 +255,7 @@ RETURN
 ```
 
 ## Medidas de Transações
+<br>
 
 ```DAX
 transacoes = 
@@ -296,6 +293,7 @@ RETURN
         0
     )
 ```
+<br>
 
 ```DAX
 maior_menor_transacao = 
