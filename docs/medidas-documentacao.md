@@ -7,15 +7,15 @@ Este documento lista todas as medidas criadas no modelo Power BI, suas regras de
 <br>
 
 Índice das Medidas:
-- [Devoluções - Absoluto](#medidas-de-devolução-absoluto)
-- [Devoluções - Percentual](#medidas-de-devolução-percentual)
-- [Entregas](#medidas-de-entregas)
-- [Faturamento](#medida-de-faturamento)
-- [Contagens](#medidas-de-contagem)
+- [Faturamento](#medidas-de-faturamento)
+- [Produtos Vendidos](#medidas-de-produtos-vendidos)
+- [Ticket Médio](#medidas-de-ticket-médio)
+- [Transações](#medidas-de-transações)
 
 ---
 
 ## Medidas de Faturamento
+[← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
 <br>
 
 ```DAX
@@ -102,6 +102,7 @@ RETURN
 ```
 
 ## Medidas de Produtos Vendidos
+[← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
 <br>
 
 ```DAX
@@ -228,6 +229,7 @@ RETURN
 ```
 
 ## Medidas de Ticket Médio
+[← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
 <br>
 
 ```DAX
@@ -266,6 +268,7 @@ RETURN
 ```
 
 ## Medidas de Transações
+[← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
 <br>
 
 ```DAX
