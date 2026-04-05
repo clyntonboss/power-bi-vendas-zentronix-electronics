@@ -1,4 +1,5 @@
 <h1>Documentação das Medidas</h1>
+
 ## Projeto Vendas — Zentronix Electronics
 
 Este documento lista todas as medidas criadas no modelo Power BI, suas regras de negócio, dependências e retornos esperados.
