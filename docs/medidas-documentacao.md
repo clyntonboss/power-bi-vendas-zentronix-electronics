@@ -1,6 +1,17 @@
 # Documentação das Medidas: Projeto Faturamento — Zentronix Electronics
 
 Este documento lista todas as medidas criadas no modelo Power BI, suas regras de negócio, dependências e retornos esperados.
+<br>
+
+[← Voltar ao Projeto](https://github.com/clyntonboss/power-bi-logistica-transflow-logistics)
+<br>
+
+Índice das Medidas:
+- [Devoluções - Absoluto](#medidas-de-devolução-absoluto)
+- [Devoluções - Percentual](#medidas-de-devolução-percentual)
+- [Entregas](#medidas-de-entregas)
+- [Faturamento](#medida-de-faturamento)
+- [Contagens](#medidas-de-contagem)
 
 ---
 
