@@ -7,10 +7,10 @@ Este documento lista todas as medidas criadas no modelo Power BI, suas regras de
 <br>
 
 Índice das Medidas:
-- [Faturamento](#medidas-de-faturamento)
-- [Produtos Vendidos](#medidas-de-produtos-vendidos)
-- [Ticket Médio](#medidas-de-ticket-médio)
-- [Transações](#medidas-de-transações)
+- 💰 [Faturamento](#medidas-de-faturamento)
+- 📦 [Produtos Vendidos](#medidas-de-produtos-vendidos)
+- 🎟 [Ticket Médio](#medidas-de-ticket-médio)
+- 💼 [Transações](#medidas-de-transações)
 
 ---
 
