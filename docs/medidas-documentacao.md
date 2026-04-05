@@ -1,4 +1,5 @@
-# Documentação das Medidas: Projeto Vendas — Zentronix Electronics
+# Documentação das Medidas
+## Projeto Vendas — Zentronix Electronics
 
 Este documento lista todas as medidas criadas no modelo Power BI, suas regras de negócio, dependências e retornos esperados.
 <br>
@@ -15,7 +16,7 @@ Este documento lista todas as medidas criadas no modelo Power BI, suas regras de
 ---
 
 ## 💰 Medidas de Faturamento
-[← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
+[← Topo](#documentação-das-medidas)
 <br>
 
 ```DAX
@@ -102,7 +103,7 @@ RETURN
 ```
 
 ## 📦 Medidas de Produtos Vendidos
-[← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
+[← Topo](#documentação-das-medidas)
 <br>
 
 ```DAX
@@ -229,7 +230,7 @@ RETURN
 ```
 
 ## 🎟 Medidas de Ticket Médio
-[← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
+[← Topo](#documentação-das-medidas)
 <br>
 
 ```DAX
@@ -268,7 +269,7 @@ RETURN
 ```
 
 ## 💼 Medidas de Transações
-[← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
+[← Topo](#documentação-das-medidas)
 <br>
 
 ```DAX
