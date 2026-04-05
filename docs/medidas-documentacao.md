@@ -7,14 +7,14 @@ Este documento lista todas as medidas criadas no modelo Power BI, suas regras de
 <br>
 
 Índice das Medidas:
-- 💰 [Faturamento](#medidas-de-faturamento)
-- 📦 [Produtos Vendidos](#medidas-de-produtos-vendidos)
-- 🎟 [Ticket Médio](#medidas-de-ticket-médio)
-- 💼 [Transações](#medidas-de-transações)
+- 💰 [Faturamento](#-medidas-de-faturamento)
+- 📦 [Produtos Vendidos](#-medidas-de-produtos-vendidos)
+- 🎟 [Ticket Médio](#-medidas-de-ticket-médio)
+- 💼 [Transações](#-medidas-de-transações)
 
 ---
 
-## Medidas de Faturamento
+## 💰 Medidas de Faturamento
 [← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
 <br>
 
@@ -101,7 +101,7 @@ RETURN
     )
 ```
 
-## Medidas de Produtos Vendidos
+## 📦 Medidas de Produtos Vendidos
 [← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
 <br>
 
@@ -228,7 +228,7 @@ RETURN
     _Resultado
 ```
 
-## Medidas de Ticket Médio
+## 🎟 Medidas de Ticket Médio
 [← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
 <br>
 
@@ -267,7 +267,7 @@ RETURN
     )
 ```
 
-## Medidas de Transações
+## 💼 Medidas de Transações
 [← Topo](#documentação-das-medidas-projeto-vendas--zentronix-electronics)
 <br>
 
