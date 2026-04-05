@@ -1,4 +1,4 @@
-# Documentação das Medidas: Projeto Faturamento — Zentronix Electronics
+# Documentação das Medidas: Projeto Vendas — Zentronix Electronics
 
 Este documento lista todas as medidas criadas no modelo Power BI, suas regras de negócio, dependências e retornos esperados.
 <br>
