@@ -1,6 +1,31 @@
 # Projeto Vendas — Zentronix Electronics
 ![BOSS BI Framework](https://img.shields.io/badge/Powered%20by-BOSS%20BI%20Framework-black?style=for-the-badge&logo=powerbi&logoColor=yellow)  
 
+---
+
+Índice:
+<br>
+
+- 📊 [Visão Geral](#-visão-geral)
+- 🧠 [Contexto do Problema](#-contexto-do-problema)
+- 🎯 [Abordagem Estratégica](#-abordagem-estratégica)
+- 🧠 [Metodologia Aplicada](#-metodologia-aplicada--boss-bi-framework)
+- 🔷 [Fluxo da Metodologia](#-fluxo-do-boss-bi-framework)
+- 📌 [Detalhamento das Etapas](#-detalhamento-das-etapas)
+- 📈 [Impactos e Resultados](#-impactos-e-resultados)
+- 🧩 [Estrutura do Dashboard](#-estrutura-do-dashboard)
+- 📊 [Visualizações Analíticas](#-visualizações-analíticas)
+- 🎛 [Filtros Interativos](#-filtros-interativos)
+- 🎨 [Experiência de Navegação](#-experiência-de-navegação)
+- 🛠 [Stack Técnica](#-stack-técnica)
+- 🧱 [Modelagem de Dados](#-modelagem-de-dados)
+- 📉 [Modelo de Dados](#-modelo-de-dados)
+- 📸 [Preview do Dashboard](#-preview-do-dashboard)
+- 📄 [Documentação das Medidas](#-documentação-das-medidas)
+- 👤 [Autor](#-autor)
+
+---
+
 ## 📊 Visão Geral
 
 Este projeto apresenta um **dashboard de performance de vendas**, desenvolvido em **Power BI**, para a empresa fictícia **Zentronix Electronics**.
@@ -192,7 +217,7 @@ Painel interativo permitindo:
 
 ---
 
-## 🎛️ Filtros Interativos
+## 🎛 Filtros Interativos
 
 O dashboard permite análise dinâmica por:
 
@@ -215,7 +240,7 @@ Esses elementos melhoram a experiência de exploração dos dados.
 
 ---
 
-## 🛠️ Stack Técnica
+## 🛠 Stack Técnica
 
 - Excel
 - Power BI
@@ -251,7 +276,7 @@ Essa abordagem é especialmente útil em contextos que exigem padronização, re
 
 Com isso, a solução proporciona maior padronização e consistência estrutural dos dados, permitindo análises mais confiáveis, melhor governança das informações e maior flexibilidade para evolução do modelo analítico conforme novas necessidades do negócio.
 
-## 🗂️ Modelo de Dados
+## 📉 Modelo de Dados
 
 ![Modelo de Dados](images/modelo-dados-zentronix-electronics.png)  
 
@@ -267,7 +292,7 @@ A modelagem foi estruturada para equilibrar normalização e desempenho, sendo p
 
 Para consultar a documentação das medidas deste projeto, suas fórmulas e descrições, acesse a **[Documentação das Medidas](docs/medidas-documentacao.md)**.
 
-# 👨‍💻 Autor
+## 👤 Autor
 
 Projeto desenvolvido como parte do meu portfólio profissional em **Business Intelligence e Data Analytics**, destacando habilidades avançadas e aplicáveis a diversos cenários analíticos:
 
