@@ -318,7 +318,7 @@ A modelagem foi estruturada para equilibrar normalização e desempenho, sendo p
 
 ![Dashboard Preview](images/vendas-zentronix-electronics.png)
 
-## Documentação das Medidas
+## 📄 Documentação das Medidas
 [← Topo](#projeto-vendas--zentronix-electronics)
 <br>
 
