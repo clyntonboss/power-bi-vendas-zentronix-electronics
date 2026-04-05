@@ -3,7 +3,7 @@
 Este documento lista todas as medidas criadas no modelo Power BI, suas regras de negócio, dependências e retornos esperados.
 <br>
 
-[← Voltar ao Projeto](https://github.com/clyntonboss/power-bi-logistica-transflow-logistics)
+[← Voltar ao Projeto](https://github.com/clyntonboss/power-bi-vendas-zentronix-electronics)
 <br>
 
 Índice das Medidas:
@@ -409,3 +409,6 @@ RETURN
         "#808080"
     )
 ```
+<br>
+
+[← Voltar ao Projeto](https://github.com/clyntonboss/power-bi-vendas-zentronix-electronics)
